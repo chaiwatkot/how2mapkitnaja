@@ -16,6 +16,7 @@ protocol MapSceneViewControllerInterface: class {
   func displayAnnotationPin(viewModel: MapScene.GetAnnotation.ViewModel)
   func displayUpdateRegion(viewModel: MapScene.UpdateRegion.ViewModel)
   func displayGetCurrentLocationFromMap(viewModel: MapScene.GetCurrentLocationFromMap.ViewModel)
+  func displayGetDirection(viewModel: MapScene.GetDirection.ViewModel)
 }
 
 final class MapSceneViewController: UIViewController, MapSceneViewControllerInterface {
@@ -29,6 +30,7 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
   }()
   
   private var currentLocation: CLLocation?
+  private var tappedLocation: CLLocation?
   private var directionsArray: [MKDirections] = []
   
   // MARK: - Object lifecycle
@@ -130,9 +132,24 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     interactor.getCurrentLocationFromMap(request: request)
   }
   
+  private func getDirection() {
+    guard let current = currentLocation, let target = tappedLocation else {
+      presentOneButtonAlert()
+      return
+    }
+    
+    let request = MapScene.GetDirection.Request(currentLocation: current, tappedLocation: target)
+    interactor.getDirection(request: request)
+  }
+  
+  // MARK: - Action func
+  @IBAction private func didTappedGooooooo() {
+    getDirection()
+  }
   
   // MARK: - Display logic
   func displayTappedCoordinate(viewModel: MapScene.GetTappedCoordinate.ViewModel) {
+    tappedLocation = viewModel.location
     mapView.removeOverlays(mapView.overlays)
     locationManager.startUpdatingLocation()
     getLocationDetails(coordinate: viewModel.coordinate)
@@ -162,6 +179,17 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
       presentOneButtonAlert(title: userError.title, message: userError.message)
     }
   }
+  
+  func displayGetDirection(viewModel: MapScene.GetDirection.ViewModel) {
+    switch viewModel.dierection {
+    case .success(result: let direction):
+      for route in direction.routes {
+        mapView.addOverlay(route.polyline)
+      }
+    case .failure(error: let userError):
+      presentOneButtonAlert(title: userError.title, message: userError.message)
+    }
+  }
 }
 
 extension MapSceneViewController: MKMapViewDelegate {
@@ -173,6 +201,16 @@ extension MapSceneViewController: MKMapViewDelegate {
       annotationView.updateUI(with: annotation, type: .other)
     }
     return annotationView
+  }
+  
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    if let polyLineOverlay = overlay as? MKPolyline {
+      let renderer = MKPolylineRenderer(overlay: polyLineOverlay)
+      renderer.strokeColor = .purple
+      return renderer
+    } else {
+      return MKOverlayRenderer(overlay: overlay)
+    }
   }
 }
 

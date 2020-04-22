@@ -16,6 +16,7 @@ protocol MapSceneInteractorInterface {
   func getAnnpotation(request: MapScene.GetAnnotation.Request)
   func updateRegion(request: MapScene.UpdateRegion.Request)
   func getCurrentLocationFromMap(request: MapScene.GetCurrentLocationFromMap.Request)
+  func getDirection(request: MapScene.GetDirection.Request)
 }
 
 final class MapSceneInteractor: MapSceneInteractorInterface {
@@ -25,9 +26,11 @@ final class MapSceneInteractor: MapSceneInteractorInterface {
   // set default to 3 km.
   var regionMeters: Double = 3000
   var currentLocation: CLLocation?
+  var targetLocation: CLLocation?
 
   // MARK: - Business logic
   func getTappedCoordinate(request: MapScene.GetTappedCoordinate.Request) {
+    
     let response = MapScene.GetTappedCoordinate.Response(cgPoint: request.cgPoint, map: request.map)
     presenter.presentTappedCoordinate(response: response)
   }
@@ -69,5 +72,34 @@ final class MapSceneInteractor: MapSceneInteractorInterface {
         
     let response = MapScene.GetCurrentLocationFromMap.Response(location: location)
     presenter.presentGetCurrentLocation(response: response)
+  }
+  
+  func getDirection(request: MapScene.GetDirection.Request) {
+    let directionRequest = generateDirectionsRequest(source: request.currentLocation, target: request.tappedLocation)
+    let directions = MKDirections(request: directionRequest)
+    
+    directions.calculate { [weak self] (result, _) in
+      if let response = result {
+        let response = MapScene.GetDirection.Response(dierection: .success(result: response))
+        self?.presenter.presentGetDirection(response: response)
+      } else {
+        let response = MapScene.GetDirection.Response(dierection: .failure(error: UserError()))
+        self?.presenter.presentGetDirection(response: response)
+      }
+    }
+  }
+  
+  //MARK: - Geberate logic
+  private func generateDirectionsRequest(source: CLLocation, target: CLLocation) -> MKDirections.Request {
+    let startingLocation = MKPlacemark(coordinate: source.coordinate)
+    let destination = MKPlacemark(coordinate: target.coordinate)
+    
+    let request = MKDirections.Request()
+    request.source = MKMapItem(placemark: startingLocation)
+    request.destination = MKMapItem(placemark: destination)
+    request.transportType = .automobile
+    request.requestsAlternateRoutes = false
+    
+    return request
   }
 }

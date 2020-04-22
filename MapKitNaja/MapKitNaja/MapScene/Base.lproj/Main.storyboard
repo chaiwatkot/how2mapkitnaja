@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrh-9Z-jP0">
                                 <rect key="frame" x="0.0" y="820.5" width="414" height="41.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uq9-lI-9Kn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Location" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uq9-lI-9Kn">
                                         <rect key="frame" x="8" y="8" width="398" height="25.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
@@ -37,14 +37,32 @@
                                     <constraint firstItem="uq9-lI-9Kn" firstAttribute="top" secondItem="Qrh-9Z-jP0" secondAttribute="top" constant="8" id="yWZ-JP-Ifw"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5Z-XN-TAN">
+                                <rect key="frame" x="324" y="731" width="60" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hjH-fh-Qmj"/>
+                                    <constraint firstAttribute="width" constant="60" id="yiE-hr-PRf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                <color key="tintColor" red="0.46274509800000002" green="0.19215686269999999" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="GO" backgroundImage="circle.fill" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTappedGooooooo" destination="BYZ-38-t0r" eventType="touchUpInside" id="NB3-OA-IMA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P5Z-XN-TAN" secondAttribute="trailing" constant="30" id="2jV-gr-gKJ"/>
                             <constraint firstItem="Tqo-nI-8gk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PMN-A8-YlY"/>
                             <constraint firstItem="Tqo-nI-8gk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QW9-lJ-tf5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qrh-9Z-jP0" secondAttribute="bottom" id="UZL-5E-X9L"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qrh-9Z-jP0" secondAttribute="trailing" id="Xmh-yC-MUB"/>
                             <constraint firstItem="Qrh-9Z-jP0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aGp-m1-hSY"/>
+                            <constraint firstItem="Qrh-9Z-jP0" firstAttribute="top" secondItem="P5Z-XN-TAN" secondAttribute="bottom" constant="30" id="fat-Zc-sCl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tqo-nI-8gk" secondAttribute="trailing" id="rOP-c8-v2e"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tqo-nI-8gk" secondAttribute="bottom" id="yJS-Fk-grE"/>
                         </constraints>
@@ -60,4 +78,7 @@
             <point key="canvasLocation" x="139" y="115"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circle.fill" catalog="system" width="64" height="60"/>
+    </resources>
 </document>

@@ -21,6 +21,7 @@ struct MapScene {
       let map: MKMapView
     }
     struct ViewModel {
+      let location: CLLocation
       let coordinate: CLLocationCoordinate2D
     }
   }
@@ -72,6 +73,19 @@ struct MapScene {
     }
     struct ViewModel {
       let locationDisplay: UserResult<String>
+    }
+  }
+  
+  struct GetDirection {
+    struct Request {
+      let currentLocation: CLLocation
+      let tappedLocation: CLLocation
+    }
+    struct Response {
+      let dierection: UserResult<MKDirections.Response>
+    }
+    struct ViewModel {
+      let dierection: UserResult<MKDirections.Response>
     }
   }
 }
