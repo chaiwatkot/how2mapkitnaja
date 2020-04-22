@@ -7,20 +7,41 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 protocol MapScenePresenterInterface {
-  func presentSomething(response: MapScene.Something.Response)
+  func presentTappedCoordinate(response: MapScene.GetTappedCoordinate.Response)
+  func presentAnnotation(response: MapScene.GetAnnotation.Response)
+  func presentUpdateRegion(response: MapScene.UpdateRegion.Response)
+  func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response)
 }
 
-class MapScenePresenter: MapScenePresenterInterface {
+final class MapScenePresenter: MapScenePresenterInterface {
   weak var viewController: MapSceneViewControllerInterface!
 
   // MARK: - Presentation logic
+  func presentTappedCoordinate(response: MapScene.GetTappedCoordinate.Response) {
+    let tappedCoordinate = response.map.convert(response.cgPoint, toCoordinateFrom: response.map)
+    let viewModel = MapScene.GetTappedCoordinate.ViewModel(coordinate: tappedCoordinate)
+    viewController.displayTappedCoordinate(viewModel: viewModel)
+  }
 
-  func presentSomething(response: MapScene.Something.Response) {
-    // NOTE: Format the response from the Interactor and pass the result back to the View Controller. The resulting view model should be using only primitive types. Eg: the view should not need to involve converting date object into a formatted string. The formatting is done here.
-
-    let viewModel = MapScene.Something.ViewModel()
-    viewController.displaySomething(viewModel: viewModel)
+  func presentAnnotation(response: MapScene.GetAnnotation.Response) {
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = response.coordinate
+    
+    let viewModel = MapScene.GetAnnotation.ViewModel(pin: annotation)
+    viewController.displayAnnotationPin(viewModel: viewModel)
+  }
+  
+  func presentUpdateRegion(response: MapScene.UpdateRegion.Response) {
+    let viewModel = MapScene.UpdateRegion.ViewModel(coordinate: response.coordinate, regionMeter: response.regionMeter)
+    viewController.displayUpdateRegion(viewModel: viewModel)
+  }
+  
+  func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response) {
+    let viewModel = MapScene.GetCurrentLocationFromMap.ViewModel(location: response.location)
+    viewController.displayGetCurrentLocationFromMap(viewModel: viewModel)
   }
 }

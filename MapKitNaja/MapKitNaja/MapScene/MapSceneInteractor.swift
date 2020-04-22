@@ -7,29 +7,49 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 protocol MapSceneInteractorInterface {
-  func doSomething(request: MapScene.Something.Request)
-  var model: Entity? { get }
+  func getTappedCoordinate(request: MapScene.GetTappedCoordinate.Request)
+  func getAnnpotation(request: MapScene.GetAnnotation.Request)
+  func updateRegion(request: MapScene.UpdateRegion.Request)
+  func getCurrentLocationFromMap(request: MapScene.GetCurrentLocationFromMap.Request)
 }
 
-class MapSceneInteractor: MapSceneInteractorInterface {
+final class MapSceneInteractor: MapSceneInteractorInterface {
   var presenter: MapScenePresenterInterface!
   var worker: MapSceneWorker?
-  var model: Entity?
+  
+  // set default to 3 km.
+  var regionMeters: Double = 3000
+  var currentLocation: CLLocation?
 
   // MARK: - Business logic
-
-  func doSomething(request: MapScene.Something.Request) {
-    worker?.doSomeWork { [weak self] in
-      if case let Result.success(data) = $0 {
-        // If the result was successful, we keep the data so that we can deliver it to another view controller through the router.
-        self?.model = data
-      }
-
-      // NOTE: Pass the result to the Presenter. This is done by creating a response model with the result from the worker. The response could contain a type like UserResult enum (as declared in the SCB Easy project) with the result as an associated value.
-      let response = MapScene.Something.Response()
-      self?.presenter.presentSomething(response: response)
+  func getTappedCoordinate(request: MapScene.GetTappedCoordinate.Request) {
+    let response = MapScene.GetTappedCoordinate.Response(cgPoint: request.cgPoint, map: request.map)
+    presenter.presentTappedCoordinate(response: response)
+  }
+  
+  func getAnnpotation(request: MapScene.GetAnnotation.Request) {
+    let response = MapScene.GetAnnotation.Response(coordinate: request.coordinate)
+    presenter.presentAnnotation(response: response)
+  }
+  
+  func updateRegion(request: MapScene.UpdateRegion.Request) {
+    let response = MapScene.UpdateRegion.Response(coordinate: request.coordinate, regionMeter: regionMeters)
+    presenter.presentUpdateRegion(response: response)
+  }
+  
+  func getCurrentLocationFromMap(request: MapScene.GetCurrentLocationFromMap.Request) {
+    let latitude = request.coordinate.latitude
+    let longitude = request.coordinate.longitude
+    var location = CLLocation(latitude: latitude, longitude: longitude)
+    if let currentLocation = self.currentLocation {
+      location = currentLocation
     }
+        
+    let response = MapScene.GetCurrentLocationFromMap.Response(location: location)
+    presenter.presentGetCurrentLocation(response: response)
   }
 }

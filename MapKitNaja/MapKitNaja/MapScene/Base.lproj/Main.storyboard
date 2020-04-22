@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map Scene View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MapSceneViewController" customModule="MapKitNaja" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tqo-nI-8gk">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrh-9Z-jP0">
+                                <rect key="frame" x="0.0" y="820.5" width="414" height="41.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uq9-lI-9Kn">
+                                        <rect key="frame" x="8" y="8" width="398" height="25.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uq9-lI-9Kn" secondAttribute="bottom" constant="8" id="C8I-YH-jpv"/>
+                                    <constraint firstItem="uq9-lI-9Kn" firstAttribute="leading" secondItem="Qrh-9Z-jP0" secondAttribute="leading" constant="8" id="Z6D-aJ-hE7"/>
+                                    <constraint firstAttribute="trailing" secondItem="uq9-lI-9Kn" secondAttribute="trailing" constant="8" id="hLn-Nw-hlJ"/>
+                                    <constraint firstItem="uq9-lI-9Kn" firstAttribute="top" secondItem="Qrh-9Z-jP0" secondAttribute="top" constant="8" id="yWZ-JP-Ifw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Tqo-nI-8gk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PMN-A8-YlY"/>
+                            <constraint firstItem="Tqo-nI-8gk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QW9-lJ-tf5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qrh-9Z-jP0" secondAttribute="bottom" id="UZL-5E-X9L"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qrh-9Z-jP0" secondAttribute="trailing" id="Xmh-yC-MUB"/>
+                            <constraint firstItem="Qrh-9Z-jP0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aGp-m1-hSY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tqo-nI-8gk" secondAttribute="trailing" id="rOP-c8-v2e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tqo-nI-8gk" secondAttribute="bottom" id="yJS-Fk-grE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationDescription" destination="uq9-lI-9Kn" id="J8A-KX-bAp"/>
+                        <outlet property="mapView" destination="Tqo-nI-8gk" id="8z4-aE-gNC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="115"/>
+        </scene>
+    </scenes>
+</document>

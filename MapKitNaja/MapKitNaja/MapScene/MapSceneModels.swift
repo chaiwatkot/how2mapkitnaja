@@ -7,15 +7,71 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 struct MapScene {
-  /// This structure represents a use case
-  struct Something {
-    /// Data struct sent to Interactor
-    struct Request {}
-    /// Data struct sent to Presenter
-    struct Response {}
-    /// Data struct sent to ViewController
-    struct ViewModel {}
+  struct GetTappedCoordinate {
+    struct Request {
+      let cgPoint: CGPoint
+      let map: MKMapView
+    }
+    struct Response {
+      let cgPoint: CGPoint
+      let map: MKMapView
+    }
+    struct ViewModel {
+      let coordinate: CLLocationCoordinate2D
+    }
+  }
+  
+  struct GetAnnotation {
+    struct Request {
+      let coordinate: CLLocationCoordinate2D
+    }
+    struct Response {
+      let coordinate: CLLocationCoordinate2D
+    }
+    struct ViewModel {
+      let pin: MKPointAnnotation
+    }
+  }
+  
+  struct UpdateRegion {
+    struct Request {
+      let coordinate: CLLocationCoordinate2D
+    }
+    struct Response {
+      let coordinate: CLLocationCoordinate2D
+      let regionMeter: Double
+    }
+    struct ViewModel {
+      let coordinate: CLLocationCoordinate2D
+      let regionMeter: Double
+    }
+  }
+  
+  struct GetCurrentLocationFromMap {
+    struct Request {
+      let coordinate: CLLocationCoordinate2D
+    }
+    struct Response {
+      let location: CLLocation
+    }
+    struct ViewModel {
+      let location: CLLocation
+    }
+  }
+  
+  struct GetLocationFromCoordinate {
+    struct Request {
+      let coordinate: CLLocationCoordinate2D
+    }
+    struct Response {
+      let location: CLLocation
+    }
+    struct ViewModel {
+      let location: CLLocation
+    }
   }
 }

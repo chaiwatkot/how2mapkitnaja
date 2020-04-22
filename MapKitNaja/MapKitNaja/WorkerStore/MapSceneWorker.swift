@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MapSceneStoreProtocol {
-  func getData(_ completion: @escaping (Result<Entity>) -> Void)
+
 }
 
 class MapSceneWorker {
@@ -22,11 +22,4 @@ class MapSceneWorker {
 
   // MARK: - Business Logic
 
-  func doSomeWork(_ completion: @escaping (Result<Entity>) -> Void) {
-    // NOTE: Do the work
-    store.getData {
-      // The worker may perform some small business logic before returning the result to the Interactor
-      completion($0)
-    }
-  }
 }

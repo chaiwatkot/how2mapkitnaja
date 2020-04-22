@@ -7,26 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11A8E162450A3780064037F /* UIViewController+UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A8E152450A3780064037F /* UIViewController+UIAlertController.swift */; };
+		A11A8E182450A44D0064037F /* ErrorMessageSame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A8E172450A44D0064037F /* ErrorMessageSame.swift */; };
 		A1BFD690245029000050101F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD68F245029000050101F /* AppDelegate.swift */; };
 		A1BFD692245029000050101F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD691245029000050101F /* SceneDelegate.swift */; };
-		A1BFD694245029000050101F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD693245029000050101F /* ViewController.swift */; };
 		A1BFD697245029000050101F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1BFD695245029000050101F /* Main.storyboard */; };
 		A1BFD699245029000050101F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1BFD698245029000050101F /* Assets.xcassets */; };
 		A1BFD69C245029000050101F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1BFD69A245029000050101F /* LaunchScreen.storyboard */; };
 		A1BFD6AB245029290050101F /* MapSceneStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A3245029290050101F /* MapSceneStore.swift */; };
 		A1BFD6AC245029290050101F /* MapScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A4245029290050101F /* MapScenePresenter.swift */; };
 		A1BFD6AD245029290050101F /* MapSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A5245029290050101F /* MapSceneWorker.swift */; };
-		A1BFD6AE245029290050101F /* MapSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A6245029290050101F /* MapSceneRouter.swift */; };
 		A1BFD6AF245029290050101F /* MapSceneModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A7245029290050101F /* MapSceneModels.swift */; };
 		A1BFD6B0245029290050101F /* MapSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A8245029290050101F /* MapSceneViewController.swift */; };
 		A1BFD6B1245029290050101F /* MapSceneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD6A9245029290050101F /* MapSceneInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A11A8E152450A3780064037F /* UIViewController+UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIAlertController.swift"; sourceTree = "<group>"; };
+		A11A8E172450A44D0064037F /* ErrorMessageSame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageSame.swift; sourceTree = "<group>"; };
 		A1BFD68C245029000050101F /* MapKitNaja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapKitNaja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1BFD68F245029000050101F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1BFD691245029000050101F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A1BFD693245029000050101F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A1BFD696245029000050101F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A1BFD698245029000050101F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1BFD69B245029000050101F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		A1BFD6A3245029290050101F /* MapSceneStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneStore.swift; sourceTree = "<group>"; };
 		A1BFD6A4245029290050101F /* MapScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScenePresenter.swift; sourceTree = "<group>"; };
 		A1BFD6A5245029290050101F /* MapSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneWorker.swift; sourceTree = "<group>"; };
-		A1BFD6A6245029290050101F /* MapSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneRouter.swift; sourceTree = "<group>"; };
 		A1BFD6A7245029290050101F /* MapSceneModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneModels.swift; sourceTree = "<group>"; };
 		A1BFD6A8245029290050101F /* MapSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneViewController.swift; sourceTree = "<group>"; };
 		A1BFD6A9245029290050101F /* MapSceneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneInteractor.swift; sourceTree = "<group>"; };
@@ -51,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A11A8E142450A3610064037F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				A11A8E152450A3780064037F /* UIViewController+UIAlertController.swift */,
+				A11A8E172450A44D0064037F /* ErrorMessageSame.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		A1BFD683245029000050101F = {
 			isa = PBXGroup;
 			children = (
@@ -70,12 +79,11 @@
 		A1BFD68E245029000050101F /* MapKitNaja */ = {
 			isa = PBXGroup;
 			children = (
+				A11A8E142450A3610064037F /* Helper */,
 				A1BFD6B4245029620050101F /* WorkerStore */,
 				A1BFD6B3245029300050101F /* MapScene */,
 				A1BFD68F245029000050101F /* AppDelegate.swift */,
 				A1BFD691245029000050101F /* SceneDelegate.swift */,
-				A1BFD693245029000050101F /* ViewController.swift */,
-				A1BFD695245029000050101F /* Main.storyboard */,
 				A1BFD698245029000050101F /* Assets.xcassets */,
 				A1BFD69A245029000050101F /* LaunchScreen.storyboard */,
 				A1BFD69D245029000050101F /* Info.plist */,
@@ -87,10 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				A1BFD6A4245029290050101F /* MapScenePresenter.swift */,
-				A1BFD6A6245029290050101F /* MapSceneRouter.swift */,
 				A1BFD6A7245029290050101F /* MapSceneModels.swift */,
 				A1BFD6A8245029290050101F /* MapSceneViewController.swift */,
 				A1BFD6A9245029290050101F /* MapSceneInteractor.swift */,
+				A1BFD695245029000050101F /* Main.storyboard */,
 			);
 			path = MapScene;
 			sourceTree = "<group>";
@@ -175,15 +183,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1BFD694245029000050101F /* ViewController.swift in Sources */,
 				A1BFD6AC245029290050101F /* MapScenePresenter.swift in Sources */,
 				A1BFD6B1245029290050101F /* MapSceneInteractor.swift in Sources */,
 				A1BFD690245029000050101F /* AppDelegate.swift in Sources */,
 				A1BFD6B0245029290050101F /* MapSceneViewController.swift in Sources */,
 				A1BFD6AD245029290050101F /* MapSceneWorker.swift in Sources */,
 				A1BFD692245029000050101F /* SceneDelegate.swift in Sources */,
-				A1BFD6AE245029290050101F /* MapSceneRouter.swift in Sources */,
+				A11A8E162450A3780064037F /* UIViewController+UIAlertController.swift in Sources */,
 				A1BFD6AB245029290050101F /* MapSceneStore.swift in Sources */,
+				A11A8E182450A44D0064037F /* ErrorMessageSame.swift in Sources */,
 				A1BFD6AF245029290050101F /* MapSceneModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
