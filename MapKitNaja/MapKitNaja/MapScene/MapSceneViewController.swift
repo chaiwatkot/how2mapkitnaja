@@ -130,22 +130,6 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     interactor.getCurrentLocationFromMap(request: request)
   }
   
-//  func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-//    guard let tappedCoordinate = tappedCoordinate else { return }
-//    let location = getLocationFromCordinate(coprdinate: tappedCoordinate)
-//    let geoCoder = CLGeocoder()
-//    geoCoder.reverseGeocodeLocation(location) { [weak self] placeMarks, error   in
-//      if let placeMark = placeMarks?.first {
-//        let streetNumber = placeMark.subThoroughfare ?? ""
-//        let streetName = placeMark.thoroughfare ?? ""
-//        let placeName = placeMark.name ?? ""
-//
-//        self?.updateLocationLabel(text: streetNumber + streetName + placeName)
-//      } else if let error = error {
-//        print(error)
-//      }
-//    }
-//  }
   
   // MARK: - Display logic
   func displayTappedCoordinate(viewModel: MapScene.GetTappedCoordinate.ViewModel) {
@@ -171,12 +155,25 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
   }
   
   func displayGetLocationDetails(viewModel: MapScene.GetLocationDetails.ViewModel) {
-    
+    switch viewModel.locationDisplay {
+    case .success(result: let locationsDescription):
+      locationDescription.text = locationsDescription
+    case .failure(error: let userError):
+      presentOneButtonAlert(title: userError.title, message: userError.message)
+    }
   }
 }
 
 extension MapSceneViewController: MKMapViewDelegate {
-  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    let annotationView = AnnotationViewJa()
+    if annotation is MKUserLocation {
+      annotationView.updateUI(with: annotation, type: .currentUser)
+    } else {
+      annotationView.updateUI(with: annotation, type: .other)
+    }
+    return annotationView
+  }
 }
 
 extension MapSceneViewController: CLLocationManagerDelegate {

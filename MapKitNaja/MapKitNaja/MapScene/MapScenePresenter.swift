@@ -38,7 +38,7 @@ final class MapScenePresenter: MapScenePresenterInterface {
       let streetNumber = detail.subThoroughfare ?? ""
       let streetName = detail.thoroughfare ?? ""
       let placeName = detail.name ?? ""
-      let locationDisplay: String = "\(placeName) \(streetNumber) \n \(placeName)"
+      let locationDisplay: String = "\(streetNumber), \(streetName) \n \(placeName)"
       
       let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .success(result: locationDisplay))
       viewController.displayGetLocationDetails(viewModel: viewModel)
