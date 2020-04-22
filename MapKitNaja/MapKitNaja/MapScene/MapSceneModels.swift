@@ -71,7 +71,7 @@ struct MapScene {
       let locationDetails: UserResult<GeoLocation.Response>
     }
     struct ViewModel {
-      let locationDetails: UserResult<GeoLocation.Response>
+      let locationDisplay: UserResult<String>
     }
   }
 }

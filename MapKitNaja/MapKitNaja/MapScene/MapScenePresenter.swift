@@ -12,7 +12,7 @@ import CoreLocation
 
 protocol MapScenePresenterInterface {
   func presentTappedCoordinate(response: MapScene.GetTappedCoordinate.Response)
-  func presentGetLocationDetails(request: MapScene.GetLocationDetails.Response)
+  func presentGetLocationDetails(response: MapScene.GetLocationDetails.Response)
   func presentAnnotation(response: MapScene.GetAnnotation.Response)
   func presentUpdateRegion(response: MapScene.UpdateRegion.Response)
   func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response)
@@ -28,8 +28,23 @@ final class MapScenePresenter: MapScenePresenterInterface {
     viewController.displayTappedCoordinate(viewModel: viewModel)
   }
   
-  func presentGetLocationDetails(request: MapScene.GetLocationDetails.Response) {
-    
+  func presentGetLocationDetails(response: MapScene.GetLocationDetails.Response) {
+    switch response.locationDetails {
+    case .success(result: let locationDetails):
+      guard let detail = locationDetails.locationDetails?.first  else {
+        presentGetLocationDetailsError()
+        return
+      }
+      let streetNumber = detail.subThoroughfare ?? ""
+      let streetName = detail.thoroughfare ?? ""
+      let placeName = detail.name ?? ""
+      let locationDisplay: String = "\(placeName) \(streetNumber) \n \(placeName)"
+      
+      let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .success(result: locationDisplay))
+      viewController.displayGetLocationDetails(viewModel: viewModel)
+    case .failure(error: let userError):
+      presentGetLocationDetailsError(userError: userError)
+    }
   }
 
   func presentAnnotation(response: MapScene.GetAnnotation.Response) {
@@ -48,5 +63,10 @@ final class MapScenePresenter: MapScenePresenterInterface {
   func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response) {
     let viewModel = MapScene.GetCurrentLocationFromMap.ViewModel(location: response.location)
     viewController.displayGetCurrentLocationFromMap(viewModel: viewModel)
+  }
+  
+  private func presentGetLocationDetailsError(userError: UserError = UserError()) {
+    let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .failure(error: userError))
+    viewController.displayGetLocationDetails(viewModel: viewModel)
   }
 }

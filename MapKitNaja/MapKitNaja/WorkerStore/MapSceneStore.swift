@@ -12,11 +12,11 @@ import CoreLocation
 class MapSceneStore: MapSceneStoreProtocol {
   func getGeoCoderLocation(request: GeoLocation.Request, completion: @escaping (UserResult<GeoLocation.Response>) -> Void) {
     let geoCoder = CLGeocoder()
-    geoCoder.reverseGeocodeLocation(request.location) { (placeMarks, error) in
+    geoCoder.reverseGeocodeLocation(request.location) { (placeMarks, _) in
       if let placeMarkList = placeMarks {
         completion(UserResult.success(result: GeoLocation.Response(locationDetails: placeMarkList)))
-      } else if let errorja = error {
-        completion(UserResult.failure(error: errorja))
+      } else {
+        completion(UserResult.failure(error: UserError()))
       }
     }
   }

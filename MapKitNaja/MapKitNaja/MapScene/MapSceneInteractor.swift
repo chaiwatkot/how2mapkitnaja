@@ -40,9 +40,11 @@ final class MapSceneInteractor: MapSceneInteractorInterface {
     worker?.getGeoLocationDetail(request: GeoLocation.Request(location: location), completion: { [weak self] result in
       switch result {
       case .success(result: let result):
-        
-      case .failure:
-        
+        let response = MapScene.GetLocationDetails.Response(locationDetails: .success(result: result))
+        self?.presenter.presentGetLocationDetails(response: response)
+      case .failure(error: let userError):
+        let response = MapScene.GetLocationDetails.Response(locationDetails: .failure(error: userError))
+        self?.presenter.presentGetLocationDetails(response: response)
       }
     })
   }
