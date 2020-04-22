@@ -12,10 +12,10 @@ import CoreLocation
 
 protocol MapSceneViewControllerInterface: class {
   func displayTappedCoordinate(viewModel: MapScene.GetTappedCoordinate.ViewModel)
+  func displayGetLocationDetails(viewModel: MapScene.GetLocationDetails.ViewModel)
   func displayAnnotationPin(viewModel: MapScene.GetAnnotation.ViewModel)
   func displayUpdateRegion(viewModel: MapScene.UpdateRegion.ViewModel)
   func displayGetCurrentLocationFromMap(viewModel: MapScene.GetCurrentLocationFromMap.ViewModel)
-  func displayGetLocationFrom
 }
 
 final class MapSceneViewController: UIViewController, MapSceneViewControllerInterface {
@@ -103,6 +103,11 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     interactor.getTappedCoordinate(request: request)
   }
   
+  private func getLocationDetails(coordinate: CLLocationCoordinate2D) {
+    let request = MapScene.GetLocationDetails.Request(coordinate: coordinate)
+    interactor.getLocationDetails(request: request)
+  }
+  
   private func addAnnotation(coordinate: CLLocationCoordinate2D) {
     let request = MapScene.GetAnnotation.Request(coordinate: coordinate)
     interactor.getAnnpotation(request: request)
@@ -125,10 +130,28 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     interactor.getCurrentLocationFromMap(request: request)
   }
   
+//  func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//    guard let tappedCoordinate = tappedCoordinate else { return }
+//    let location = getLocationFromCordinate(coprdinate: tappedCoordinate)
+//    let geoCoder = CLGeocoder()
+//    geoCoder.reverseGeocodeLocation(location) { [weak self] placeMarks, error   in
+//      if let placeMark = placeMarks?.first {
+//        let streetNumber = placeMark.subThoroughfare ?? ""
+//        let streetName = placeMark.thoroughfare ?? ""
+//        let placeName = placeMark.name ?? ""
+//
+//        self?.updateLocationLabel(text: streetNumber + streetName + placeName)
+//      } else if let error = error {
+//        print(error)
+//      }
+//    }
+//  }
+  
   // MARK: - Display logic
   func displayTappedCoordinate(viewModel: MapScene.GetTappedCoordinate.ViewModel) {
     mapView.removeOverlays(mapView.overlays)
     locationManager.startUpdatingLocation()
+    getLocationDetails(coordinate: viewModel.coordinate)
     addAnnotation(coordinate: viewModel.coordinate)
     updateRegion(coordinate: viewModel.coordinate)
   }
@@ -145,6 +168,10 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
   
   func displayGetCurrentLocationFromMap(viewModel: MapScene.GetCurrentLocationFromMap.ViewModel) {
     currentLocation = viewModel.location
+  }
+  
+  func displayGetLocationDetails(viewModel: MapScene.GetLocationDetails.ViewModel) {
+    
   }
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MapSceneStoreProtocol {
-
+  func getGeoCoderLocation(request: GeoLocation.Request, completion: @escaping (UserResult<GeoLocation.Response>) -> Void)
 }
 
 class MapSceneWorker {
@@ -21,5 +21,7 @@ class MapSceneWorker {
   }
 
   // MARK: - Business Logic
-
+  func getGeoLocationDetail(request: GeoLocation.Request, completion: @escaping (UserResult<GeoLocation.Response>) -> Void) {
+    store.getGeoCoderLocation(request: request, completion: completion)
+  }
 }

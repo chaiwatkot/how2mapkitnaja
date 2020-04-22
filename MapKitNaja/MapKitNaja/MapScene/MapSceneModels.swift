@@ -63,15 +63,15 @@ struct MapScene {
     }
   }
   
-  struct GetLocationFromCoordinate {
+  struct GetLocationDetails {
     struct Request {
       let coordinate: CLLocationCoordinate2D
     }
     struct Response {
-      let location: CLLocation
+      let locationDetails: UserResult<GeoLocation.Response>
     }
     struct ViewModel {
-      let location: CLLocation
+      let locationDetails: UserResult<GeoLocation.Response>
     }
   }
 }

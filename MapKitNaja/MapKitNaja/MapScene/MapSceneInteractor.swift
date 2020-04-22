@@ -12,6 +12,7 @@ import CoreLocation
 
 protocol MapSceneInteractorInterface {
   func getTappedCoordinate(request: MapScene.GetTappedCoordinate.Request)
+  func getLocationDetails(request: MapScene.GetLocationDetails.Request)
   func getAnnpotation(request: MapScene.GetAnnotation.Request)
   func updateRegion(request: MapScene.UpdateRegion.Request)
   func getCurrentLocationFromMap(request: MapScene.GetCurrentLocationFromMap.Request)
@@ -31,6 +32,21 @@ final class MapSceneInteractor: MapSceneInteractorInterface {
     presenter.presentTappedCoordinate(response: response)
   }
   
+  func getLocationDetails(request: MapScene.GetLocationDetails.Request) {
+    let latitude = request.coordinate.latitude
+    let longitude = request.coordinate.longitude
+    let location = CLLocation(latitude: latitude, longitude: longitude)
+    
+    worker?.getGeoLocationDetail(request: GeoLocation.Request(location: location), completion: { [weak self] result in
+      switch result {
+      case .success(result: let result):
+        
+      case .failure:
+        
+      }
+    })
+  }
+
   func getAnnpotation(request: MapScene.GetAnnotation.Request) {
     let response = MapScene.GetAnnotation.Response(coordinate: request.coordinate)
     presenter.presentAnnotation(response: response)

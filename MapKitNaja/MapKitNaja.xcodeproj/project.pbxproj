@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A11A8E162450A3780064037F /* UIViewController+UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A8E152450A3780064037F /* UIViewController+UIAlertController.swift */; };
 		A11A8E182450A44D0064037F /* ErrorMessageSame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A8E172450A44D0064037F /* ErrorMessageSame.swift */; };
+		A11A8E1D2450B1800064037F /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A8E1C2450B1800064037F /* GeoLocation.swift */; };
 		A1BFD690245029000050101F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD68F245029000050101F /* AppDelegate.swift */; };
 		A1BFD692245029000050101F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BFD691245029000050101F /* SceneDelegate.swift */; };
 		A1BFD697245029000050101F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1BFD695245029000050101F /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		A11A8E152450A3780064037F /* UIViewController+UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIAlertController.swift"; sourceTree = "<group>"; };
 		A11A8E172450A44D0064037F /* ErrorMessageSame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageSame.swift; sourceTree = "<group>"; };
+		A11A8E1C2450B1800064037F /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
 		A1BFD68C245029000050101F /* MapKitNaja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapKitNaja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1BFD68F245029000050101F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1BFD691245029000050101F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		A11A8E1B2450B1120064037F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A11A8E1C2450B1800064037F /* GeoLocation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A1BFD683245029000050101F = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				A11A8E142450A3610064037F /* Helper */,
+				A11A8E1B2450B1120064037F /* Model */,
 				A1BFD6B4245029620050101F /* WorkerStore */,
 				A1BFD6B3245029300050101F /* MapScene */,
 				A1BFD68F245029000050101F /* AppDelegate.swift */,
@@ -186,6 +197,7 @@
 				A1BFD6AC245029290050101F /* MapScenePresenter.swift in Sources */,
 				A1BFD6B1245029290050101F /* MapSceneInteractor.swift in Sources */,
 				A1BFD690245029000050101F /* AppDelegate.swift in Sources */,
+				A11A8E1D2450B1800064037F /* GeoLocation.swift in Sources */,
 				A1BFD6B0245029290050101F /* MapSceneViewController.swift in Sources */,
 				A1BFD6AD245029290050101F /* MapSceneWorker.swift in Sources */,
 				A1BFD692245029000050101F /* SceneDelegate.swift in Sources */,

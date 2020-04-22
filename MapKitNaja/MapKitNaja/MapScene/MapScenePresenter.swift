@@ -12,6 +12,7 @@ import CoreLocation
 
 protocol MapScenePresenterInterface {
   func presentTappedCoordinate(response: MapScene.GetTappedCoordinate.Response)
+  func presentGetLocationDetails(request: MapScene.GetLocationDetails.Response)
   func presentAnnotation(response: MapScene.GetAnnotation.Response)
   func presentUpdateRegion(response: MapScene.UpdateRegion.Response)
   func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response)
@@ -25,6 +26,10 @@ final class MapScenePresenter: MapScenePresenterInterface {
     let tappedCoordinate = response.map.convert(response.cgPoint, toCoordinateFrom: response.map)
     let viewModel = MapScene.GetTappedCoordinate.ViewModel(coordinate: tappedCoordinate)
     viewController.displayTappedCoordinate(viewModel: viewModel)
+  }
+  
+  func presentGetLocationDetails(request: MapScene.GetLocationDetails.Response) {
+    
   }
 
   func presentAnnotation(response: MapScene.GetAnnotation.Response) {
