@@ -17,6 +17,7 @@ protocol MapSceneViewControllerInterface: class {
   func displayUpdateRegion(viewModel: MapScene.UpdateRegion.ViewModel)
   func displayGetCurrentLocationFromMap(viewModel: MapScene.GetCurrentLocationFromMap.ViewModel)
   func displayGetDirection(viewModel: MapScene.GetDirection.ViewModel)
+  func displayGetDistance(viewModel: MapScene.GetDistance.ViewModel)
 }
 
 final class MapSceneViewController: UIViewController, MapSceneViewControllerInterface {
@@ -137,9 +138,14 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
       presentOneButtonAlert()
       return
     }
-    
+    getDistance(currentLocation: current, targetLocation: target)
     let request = MapScene.GetDirection.Request(currentLocation: current, tappedLocation: target)
     interactor.getDirection(request: request)
+  }
+  
+  private func getDistance(currentLocation: CLLocation, targetLocation: CLLocation) {
+    let request = MapScene.GetDistance.Request(currentLocation: currentLocation, targetLocation: targetLocation)
+    interactor.getDistance(request: request)
   }
   
   // MARK: - Action func
@@ -185,13 +191,19 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     case .success(result: let direction):
       for route in direction.routes {
         mapView.addOverlay(route.polyline)
+        updateRegion(coordinate: route.polyline.coordinate)
       }
     case .failure(error: let userError):
       presentOneButtonAlert(title: userError.title, message: userError.message)
     }
   }
+  
+  func displayGetDistance(viewModel: MapScene.GetDistance.ViewModel) {
+    presentOneButtonAlert(title: viewModel.title, message: viewModel.description, buttonTitle: viewModel.buttonTitle)
+  }
 }
 
+// MARK: - extension
 extension MapSceneViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     let annotationView = AnnotationViewJa()

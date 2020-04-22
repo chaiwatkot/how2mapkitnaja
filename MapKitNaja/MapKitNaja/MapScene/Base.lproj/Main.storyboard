@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tqo-nI-8gk">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="776.5"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrh-9Z-jP0">
                                 <rect key="frame" x="0.0" y="820.5" width="414" height="41.5"/>
@@ -57,6 +57,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P5Z-XN-TAN" secondAttribute="trailing" constant="30" id="2jV-gr-gKJ"/>
+                            <constraint firstItem="Qrh-9Z-jP0" firstAttribute="top" secondItem="Tqo-nI-8gk" secondAttribute="bottom" id="KgE-Mn-m1j"/>
                             <constraint firstItem="Tqo-nI-8gk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PMN-A8-YlY"/>
                             <constraint firstItem="Tqo-nI-8gk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QW9-lJ-tf5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qrh-9Z-jP0" secondAttribute="bottom" id="UZL-5E-X9L"/>
@@ -64,7 +65,6 @@
                             <constraint firstItem="Qrh-9Z-jP0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aGp-m1-hSY"/>
                             <constraint firstItem="Qrh-9Z-jP0" firstAttribute="top" secondItem="P5Z-XN-TAN" secondAttribute="bottom" constant="30" id="fat-Zc-sCl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tqo-nI-8gk" secondAttribute="trailing" id="rOP-c8-v2e"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tqo-nI-8gk" secondAttribute="bottom" id="yJS-Fk-grE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -75,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="115"/>
+            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </scene>
     </scenes>
     <resources>

@@ -17,6 +17,7 @@ protocol MapScenePresenterInterface {
   func presentUpdateRegion(response: MapScene.UpdateRegion.Response)
   func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response)
   func presentGetDirection(response: MapScene.GetDirection.Response)
+  func presentGetDistance(response: MapScene.GetDistance.Response)
 }
 
 final class MapScenePresenter: MapScenePresenterInterface {
@@ -77,6 +78,14 @@ final class MapScenePresenter: MapScenePresenterInterface {
       let viewModel = MapScene.GetDirection.ViewModel(dierection: .failure(error: userError))
       viewController.displayGetDirection(viewModel: viewModel)
     }
+  }
+  
+  func presentGetDistance(response: MapScene.GetDistance.Response) {
+    let distanceBetween = response.currentLocation.distance(from: response.targetLocation)
+    let distance = String(format: "%.2f", distanceBetween / 1000 )
+    
+    let viewModel = MapScene.GetDistance.ViewModel(title: "Distance is \(distance) km.", description: "pai pai p'aiiiii", buttonTitle: ErrorMessageSame.okJa)
+    viewController.displayGetDistance(viewModel: viewModel)
   }
 
   // MARK: - private func
