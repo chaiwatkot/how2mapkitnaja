@@ -25,26 +25,14 @@ final class MapScenePresenter: MapScenePresenterInterface {
 
   // MARK: - Presentation logic
   func presentTappedCoordinate(response: MapScene.GetTappedCoordinate.Response) {
-    let tappedCoordinate = response.map.convert(response.cgPoint, toCoordinateFrom: response.map)
-    let location = CLLocation(latitude: tappedCoordinate.latitude, longitude: tappedCoordinate.longitude)
-    
-    let viewModel = MapScene.GetTappedCoordinate.ViewModel(location: location, coordinate: tappedCoordinate)
+    let viewModel = MapScene.GetTappedCoordinate.ViewModel(targetLocation: response.targetLocation, currentLocation: response.currentLocation, coordinate: response.coordinate)
     viewController.displayTappedCoordinate(viewModel: viewModel)
   }
   
   func presentGetLocationDetails(response: MapScene.GetLocationDetails.Response) {
     switch response.locationDetails {
     case .success(result: let locationDetails):
-      guard let detail = locationDetails.locationDetails?.first  else {
-        presentGetLocationDetailsError()
-        return
-      }
-      let streetNumber = detail.subThoroughfare ?? ""
-      let streetName = detail.thoroughfare ?? ""
-      let placeName = detail.name ?? ""
-      let locationDisplay: String = "\(streetNumber), \(streetName) \n \(placeName)"
-      
-      let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .success(result: locationDisplay))
+      let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .success(result: locationDetails))
       viewController.displayGetLocationDetails(viewModel: viewModel)
     case .failure(error: let userError):
       presentGetLocationDetailsError(userError: userError)
@@ -52,11 +40,24 @@ final class MapScenePresenter: MapScenePresenterInterface {
   }
 
   func presentAnnotation(response: MapScene.GetAnnotation.Response) {
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = response.coordinate
     
-    let viewModel = MapScene.GetAnnotation.ViewModel(pin: annotation)
-    viewController.displayAnnotationPin(viewModel: viewModel)
+    for details in response.locationDetails.locationDetails {
+      
+    }
+    
+    
+    let annotationViewModel = AnnotationViewModel(type: response.type, placeName: <#T##String#>, distance: <#T##String?#>)
+    
+    switch response.type {
+    case .currentUser:
+      let viewModel = MapScene.GetAnnotation.ViewModel(annotationViewModel: annotationViewModel, pin: nil)
+      viewController.displayAnnotationPin(viewModel: viewModel)
+    case .other:
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = response.location.coordinate
+      let viewModel = MapScene.GetAnnotation.ViewModel(annotationViewModel: annotationViewModel, pin: annotation)
+      viewController.displayAnnotationPin(viewModel: viewModel)
+    }
   }
   
   func presentUpdateRegion(response: MapScene.UpdateRegion.Response) {

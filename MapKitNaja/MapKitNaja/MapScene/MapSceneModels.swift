@@ -17,24 +17,31 @@ struct MapScene {
       let map: MKMapView
     }
     struct Response {
-      let cgPoint: CGPoint
-      let map: MKMapView
+      let targetLocation: CLLocation
+      let currentLocation: CLLocation
+      let coordinate: CLLocationCoordinate2D
     }
     struct ViewModel {
-      let location: CLLocation
+      let targetLocation: CLLocation
+      let currentLocation: CLLocation
       let coordinate: CLLocationCoordinate2D
     }
   }
   
   struct GetAnnotation {
     struct Request {
-      let coordinate: CLLocationCoordinate2D
+      let locationDetails: GeoLocation.Response
+      let type: AnnotationType
     }
     struct Response {
-      let coordinate: CLLocationCoordinate2D
+      let locationDetails: GeoLocation.Response
+      let location: CLLocation
+      let distance: CLLocationDistance?
+      let type: AnnotationType
     }
     struct ViewModel {
-      let pin: MKPointAnnotation
+      let annotationViewModel: AnnotationViewModel
+      let pin: MKPointAnnotation?
     }
   }
   
@@ -67,13 +74,19 @@ struct MapScene {
   struct GetLocationDetails {
     struct Request {
       let coordinate: CLLocationCoordinate2D
+      let type: AnnotationType
     }
     struct Response {
-      let locationDetails: UserResult<GeoLocation.Response>
+      let result: UserResult<GeoDetails>
     }
     struct ViewModel {
-      let locationDisplay: UserResult<String>
+      let result: UserResult<GeoDetails>
     }
+  }
+  
+  struct GeoDetails {
+    let locationDetails: GeoLocation.Response
+    let type: AnnotationType
   }
   
   struct GetDirection {
@@ -99,9 +112,7 @@ struct MapScene {
       let targetLocation: CLLocation
     }
     struct ViewModel {
-      let title: String
-      let description: String
-      let buttonTitle: String
+      let distance: String
     }
   }
 }

@@ -15,9 +15,23 @@ public enum AnnotationType {
   case other
 }
 
+public struct AnnotationViewModel {
+  let type: AnnotationType
+  let placeName: String
+  let distance: String?
+  
+  init(type: AnnotationType, placeName: String, distance: String?) {
+    self.type = type
+    self.placeName = placeName
+    self.distance = distance
+  }
+}
+
+
 public final class AnnotationViewJa: MKAnnotationView {
-  func updateUI(with annotation: MKAnnotation, type: AnnotationType) {
+  func updateUI(with annotation: MKAnnotation, viewModel: AnnotationViewModel) {
     self.annotation = annotation
+    canShowCallout = true
     switch type {
     case .currentUser:
       image = UIImage(named: "google-maps")
