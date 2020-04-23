@@ -17,10 +17,10 @@ protocol MapScenePresenterInterface {
   func presentUpdateRegion(response: MapScene.UpdateRegion.Response)
   func presentGetCurrentLocation(response: MapScene.GetCurrentLocationFromMap.Response)
   func presentGetDirection(response: MapScene.GetDirection.Response)
-  func presentGetDistance(response: MapScene.GetDistance.Response)
 }
 
 final class MapScenePresenter: MapScenePresenterInterface {
+  
   weak var viewController: MapSceneViewControllerInterface!
 
   // MARK: - Presentation logic
@@ -30,9 +30,9 @@ final class MapScenePresenter: MapScenePresenterInterface {
   }
   
   func presentGetLocationDetails(response: MapScene.GetLocationDetails.Response) {
-    switch response.locationDetails {
+    switch response.result {
     case .success(result: let locationDetails):
-      let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .success(result: locationDetails))
+      let viewModel = MapScene.GetLocationDetails.ViewModel(result: .success(result: locationDetails))
       viewController.displayGetLocationDetails(viewModel: viewModel)
     case .failure(error: let userError):
       presentGetLocationDetailsError(userError: userError)
@@ -40,13 +40,20 @@ final class MapScenePresenter: MapScenePresenterInterface {
   }
 
   func presentAnnotation(response: MapScene.GetAnnotation.Response) {
-    
-    for details in response.locationDetails.locationDetails {
-      
+    guard let detail = response.locationDetails.locationDetails?.first else { return }
+    var placeName: String = detail.thoroughfare ?? ""
+    if let locationName = detail.name {
+      placeName = locationName
     }
-    
-    
-    let annotationViewModel = AnnotationViewModel(type: response.type, placeName: <#T##String#>, distance: <#T##String?#>)
+    var details: String = ""
+    if let distance = response.distance {
+      let distanceString = String(format: "%.2f", distance / 1000 )
+      details = "\(placeName) \n distance \(distanceString) km.!!"
+    } else {
+      details = placeName
+    }
+    let annotationViewModel = AnnotationViewModel(type: response.type,
+                                                  details: details)
     
     switch response.type {
     case .currentUser:
@@ -81,17 +88,9 @@ final class MapScenePresenter: MapScenePresenterInterface {
     }
   }
   
-  func presentGetDistance(response: MapScene.GetDistance.Response) {
-    let distanceBetween = response.currentLocation.distance(from: response.targetLocation)
-    let distance = String(format: "%.2f", distanceBetween / 1000 )
-    
-    let viewModel = MapScene.GetDistance.ViewModel(title: "Distance is \(distance) km.", description: "pai pai p'aiiiii", buttonTitle: ErrorMessageSame.okJa)
-    viewController.displayGetDistance(viewModel: viewModel)
-  }
-
   // MARK: - private func
   private func presentGetLocationDetailsError(userError: UserError = UserError()) {
-    let viewModel = MapScene.GetLocationDetails.ViewModel(locationDisplay: .failure(error: userError))
+    let viewModel = MapScene.GetLocationDetails.ViewModel(result: .failure(error: userError))
     viewController.displayGetLocationDetails(viewModel: viewModel)
   }
 }

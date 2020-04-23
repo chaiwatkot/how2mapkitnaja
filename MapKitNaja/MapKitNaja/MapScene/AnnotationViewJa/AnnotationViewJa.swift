@@ -17,13 +17,11 @@ public enum AnnotationType {
 
 public struct AnnotationViewModel {
   let type: AnnotationType
-  let placeName: String
-  let distance: String?
+  let details: String
   
-  init(type: AnnotationType, placeName: String, distance: String?) {
+  init(type: AnnotationType, details: String) {
     self.type = type
-    self.placeName = placeName
-    self.distance = distance
+    self.details = details
   }
 }
 
@@ -32,6 +30,17 @@ public final class AnnotationViewJa: MKAnnotationView {
   func updateUI(with annotation: MKAnnotation, viewModel: AnnotationViewModel) {
     self.annotation = annotation
     canShowCallout = true
+    calloutOffset = CGPoint(x: -5, y: 5)
+    let detailLabel = UILabel()
+    detailLabel.textAlignment = .center
+    detailLabel.numberOfLines = 0
+    detailLabel.font = detailLabel.font.withSize(12)
+    detailLabel.text = viewModel.details
+    detailCalloutAccessoryView = detailLabel
+    updateImage(type: viewModel.type)
+  }
+  
+  func updateImage(type: AnnotationType) {
     switch type {
     case .currentUser:
       image = UIImage(named: "google-maps")

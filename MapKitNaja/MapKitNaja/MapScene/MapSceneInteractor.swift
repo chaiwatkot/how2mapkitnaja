@@ -17,7 +17,6 @@ protocol MapSceneInteractorInterface {
   func updateRegion(request: MapScene.UpdateRegion.Request)
   func getCurrentLocationFromMap(request: MapScene.GetCurrentLocationFromMap.Request)
   func getDirection(request: MapScene.GetDirection.Request)
-  func getDistance(request: MapScene.GetDistance.Request)
 }
 
 final class MapSceneInteractor: MapSceneInteractorInterface {
@@ -85,8 +84,9 @@ final class MapSceneInteractor: MapSceneInteractorInterface {
     var location = CLLocation(latitude: latitude, longitude: longitude)
     if let currentLocation = self.currentLocation {
       location = currentLocation
+    } else {
+      self.currentLocation = location
     }
-        
     let response = MapScene.GetCurrentLocationFromMap.Response(location: location)
     presenter.presentGetCurrentLocation(response: response)
   }
@@ -104,11 +104,6 @@ final class MapSceneInteractor: MapSceneInteractorInterface {
         self?.presenter.presentGetDirection(response: response)
       }
     }
-  }
-  
-  func getDistance(request: MapScene.GetDistance.Request) {
-    let response = MapScene.GetDistance.Response(currentLocation: request.currentLocation, targetLocation: request.targetLocation)
-    presenter.presentGetDistance(response: response)
   }
   
   //MARK: - Geberate logic

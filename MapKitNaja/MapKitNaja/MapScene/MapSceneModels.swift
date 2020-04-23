@@ -101,18 +101,4 @@ struct MapScene {
       let dierection: UserResult<MKDirections.Response>
     }
   }
-  
-  struct GetDistance {
-    struct Request {
-      let currentLocation: CLLocation
-      let targetLocation: CLLocation
-    }
-    struct Response {
-      let currentLocation: CLLocation
-      let targetLocation: CLLocation
-    }
-    struct ViewModel {
-      let distance: String
-    }
-  }
 }

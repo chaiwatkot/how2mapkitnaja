@@ -17,7 +17,6 @@ protocol MapSceneViewControllerInterface: class {
   func displayUpdateRegion(viewModel: MapScene.UpdateRegion.ViewModel)
   func displayGetCurrentLocationFromMap(viewModel: MapScene.GetCurrentLocationFromMap.ViewModel)
   func displayGetDirection(viewModel: MapScene.GetDirection.ViewModel)
-  func displayGetDistance(viewModel: MapScene.GetDistance.ViewModel)
 }
 
 final class MapSceneViewController: UIViewController, MapSceneViewControllerInterface {
@@ -77,8 +76,8 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
   private func setupMapView() {
     mapView.delegate = self
     mapView.showsUserLocation = true
-    let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleGesture))
-    mapView.addGestureRecognizer(longTapGesture)
+    let tapGesTure = UITapGestureRecognizer(target: self, action: #selector(handleGesture))
+    mapView.addGestureRecognizer(tapGesTure)
   }
   
   private func setupLocationManager() {
@@ -145,11 +144,6 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     interactor.getDirection(request: request)
   }
   
-  private func getDistance(currentLocation: CLLocation, targetLocation: CLLocation) {
-    let request = MapScene.GetDistance.Request(currentLocation: currentLocation, targetLocation: targetLocation)
-    interactor.getDistance(request: request)
-  }
-  
   // MARK: - Action func
   @IBAction private func didTappedGooooooo() {
     getDirection()
@@ -158,17 +152,21 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
   // MARK: - Display logic
   func displayTappedCoordinate(viewModel: MapScene.GetTappedCoordinate.ViewModel) {
     tappedLocation = viewModel.targetLocation
-    currentLocation = viewModel.targetLocation
+    currentLocation = viewModel.currentLocation
     mapView.removeOverlays(mapView.overlays)
     locationManager.startUpdatingLocation()
-    getDistance(currentLocation: viewModel.targetLocation, targetLocation: viewModel.targetLocation)
     getLocationDetails(coordinate: viewModel.coordinate, type: .other)
     updateRegion(coordinate: viewModel.coordinate)
   }
   
   func displayAnnotationPin(viewModel: MapScene.GetAnnotation.ViewModel) {
-    
-    mapView.removeAnnotations(mapView.annotations)
+    switch viewModel.annotationViewModel.type {
+    case .currentUser:
+      currentAnnotationViewModel = viewModel.annotationViewModel
+    case .other:
+      mapView.removeAnnotations(mapView.annotations)
+      targetAnnotationViewModel = viewModel.annotationViewModel
+    }
     if let pin = viewModel.pin {
       mapView.addAnnotation(pin)
     }
@@ -190,7 +188,6 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
     case .failure(error: let userError):
       presentOneButtonAlert(title: userError.title, message: userError.message)
     }
-    
   }
   
   func displayGetDirection(viewModel: MapScene.GetDirection.ViewModel) {
@@ -204,10 +201,6 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
       presentOneButtonAlert(title: userError.title, message: userError.message)
     }
   }
-  
-  func displayGetDistance(viewModel: MapScene.GetDistance.ViewModel) {
-    
-  }
 }
 
 // MARK: - extension
@@ -215,7 +208,8 @@ extension MapSceneViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     let annotationView = AnnotationViewJa()
     if annotation is MKUserLocation {
-      guard let annotationViewModel = self.currentAnnotationViewModel else { return nil }
+      annotationView.updateImage(type: .currentUser)
+      guard let annotationViewModel = self.currentAnnotationViewModel else { return annotationView }
       annotationView.updateUI(with: annotation, viewModel: annotationViewModel)
     } else {
       guard let annotationViewModel = self.targetAnnotationViewModel else { return nil }
