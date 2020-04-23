@@ -76,8 +76,8 @@ final class MapSceneViewController: UIViewController, MapSceneViewControllerInte
   private func setupMapView() {
     mapView.delegate = self
     mapView.showsUserLocation = true
-    let tapGesTure = UITapGestureRecognizer(target: self, action: #selector(handleGesture))
-    mapView.addGestureRecognizer(tapGesTure)
+    let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleGesture))
+    mapView.addGestureRecognizer(longTapGesture)
   }
   
   private func setupLocationManager() {
